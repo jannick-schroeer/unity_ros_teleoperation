@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RosMessageTypes.Sensor;
 using RosMessageTypes.Std;
+using System;
 
 
 
@@ -358,12 +359,14 @@ public class LidarUtils
         */
 
         // Just in case...
+        vizType = VizType.Lidar;
         if (maxPts < 1) maxPts = 1;
         int decmiator = 1;
 
         int data_size = vizType.GetSize();
 
         numPts = (int)(data.data.Length / data.point_step);
+        numPts = 1000;
 
         if (numPts > maxPts)
         {
@@ -395,13 +398,43 @@ public class LidarUtils
                     continue;
 
                 }
-                // Copy the 4 bytes in the float
-                for (int k = 0; k < 4; k++)
+                int row = Mathf.FloorToInt(Mathf.Sqrt(numPts));
+                float x = (i % row) - row / 2;
+                float z = Mathf.Floor(i / row) - row / 2;
+                float y = Mathf.Sin((Time.time * 1.0f) * 1.0f + x + z);
+
+                if (j == 0)
                 {
-                    outData[outIdx + j * 4 + k] = data.data[inIdx + (int)data.fields[j].offset + k];
+                    Buffer.BlockCopy(new float[] { x }, 0, outData, outIdx + j * 4, 4);
+                } else if (j == 1)
+                {
+                    Buffer.BlockCopy(new float[] { y }, 0, outData, outIdx + j*4, 4);
+                }
+                else if (j == 2)
+                {
+                    Buffer.BlockCopy(new float[] { z }, 0, outData, outIdx + j*4, 4);
+                }
+                else if (j == 3)
+                {
+                    float intensity = PackRGBA(Color.red);
+                    Buffer.BlockCopy(new float[] { intensity }, 0, outData, outIdx + j * 4, 4);
+                }
+                else if (j > 3)
+                {
+                    // Debug.Log("HIHI Error");
+                    // Copy the 4 bytes in the float
+                    for (int k = 0; k < 4; k++)
+                    {
+                        outData[outIdx + j * 4 + k] = data.data[inIdx + (int)data.fields[j].offset + k];
+                    }
                 }
             }
         }
+
+        float[] floatArray = new float[outData.Length / 4];
+        Buffer.BlockCopy(outData, 0, floatArray, 0, outData.Length);
+        //Debug.Log("HIHIHI " + floatArray[0] + " " + floatArray[1] + " " + floatArray[2] + " " + floatArray[3]);
+        //Debug.Log("HIHIHI2 " + floatArray[4] + " " + floatArray[5] + " " + floatArray[6] + " " + floatArray[7]);
         return outData;
     }
     

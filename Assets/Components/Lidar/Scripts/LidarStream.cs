@@ -75,6 +75,7 @@ public enum VizType
     RGBDMesh = 1,
     RGBD = 2,
     Splat = 4,
+    LidarSpawner = 5,
 }
 
 public static class VizTypeExtensions
@@ -86,6 +87,8 @@ public static class VizTypeExtensions
             case VizType.Lidar:
             case VizType.RGBD:
                 return 4;
+            case VizType.LidarSpawner:
+                return 6;
             case VizType.RGBDMesh:
                 return 5;
             case VizType.Splat:
@@ -176,34 +179,43 @@ public class LidarStream : SensorStream
 
         SetColorMode(renderParams.material, _intensityKeyword);
 
-        colorModeDropdown.ClearOptions();
+        colorModeDropdown?.ClearOptions();
         List<string> colorOptions = new List<string>
         {
             "RGB",
             "Intensity",
             "Z"
         };
-        colorModeDropdown.AddOptions(colorOptions);
-        colorModeDropdown.onValueChanged.AddListener(OnColorSelect);
+        colorModeDropdown?.AddOptions(colorOptions);
+        if (colorModeDropdown != null) {
+            colorModeDropdown.onValueChanged.AddListener(OnColorSelect);
+        }
 
         debugText?.SetText("--");
 
         RefreshTopics();
-        topicDropdown.onValueChanged.AddListener(OnTopicSelect);
-
-        densitySlider.onValueChanged.AddListener(OnDensityChange);
-        sizeSlider.onValueChanged.AddListener(OnSizeChange);
-        densitySlider.value = (float)displayPts / maxPts;
-
-        if ((_lidarSpawner = GetComponent<LidarSpawner>()) != null)
+        if (topicDropdown != null)
         {
+            topicDropdown.onValueChanged.AddListener(OnTopicSelect);
+
+            densitySlider.onValueChanged.AddListener(OnDensityChange);
+            sizeSlider.onValueChanged.AddListener(OnSizeChange);
+            densitySlider.value = (float)displayPts / maxPts;
+        }
+
+        //Debug.Log("HIHI initializing + " + vizType);
+        //Debug.Log("HIHI Script is running on: " + gameObject.name);
+        if ((_lidarSpawner = FindObjectOfType<LidarSpawner>()) != null)
+        {
+            //Debug.Log("HIHI initialized with spawner");
             _lidarSpawner.PointCloudGenerated += OnPointcloud;
         }
 
-        if (_enabled && !string.IsNullOrEmpty(topicName))
-        {
-            _ros.Subscribe<PointCloud2Msg>(topicName, OnPointcloud);
-        }
+        // if (_enabled && !string.IsNullOrEmpty(topicName))
+        // {
+        //    Debug.Log("HIHI initialize NOOO");
+        //    _ros.Subscribe<PointCloud2Msg>(topicName, OnPointcloud);
+        // }
     }
 
     public bool CleanTF(string name)
@@ -335,7 +347,9 @@ public class LidarStream : SensorStream
 
         int fields = pointCloud.fields.Length;
         uint point_step = pointCloud.point_step;
-        // Debug.Log("Fields: " + fields + " Point Step: " + point_step);
+        //Debug.Log("HIHI Received Pointcloud");
+        //Debug.Log("HIHI" + gameObject.name);
+        //Debug.Log("Fields: " + fields + " Point Step: " + point_step + " vizType: " + vizType);
 
         _ptData.SetData(LidarUtils.ExtractData(pointCloud, displayPts, vizType, out _numPts));
 
@@ -375,7 +389,7 @@ public class LidarStream : SensorStream
         _enabled = true;
         topicName = topic;
         topicText?.SetText(topic);
-        _ros.Subscribe<PointCloud2Msg>(topic, OnPointcloud);
+        //_ros.Subscribe<PointCloud2Msg>(topic, OnPointcloud);
         Debug.Log("Subscribed to " + topic);
     }
 
