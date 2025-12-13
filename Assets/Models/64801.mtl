@@ -1,0 +1,129 @@
+# File produced by 
+
+newmtl polySurf1
+  Ns 26.4
+  d 1.0
+  illum 2
+  Kd 0 0 0
+  Ka 0 0 0
+  Ks 0.498 0.498 0.498
+
+newmtl polySurf1_1
+  Ns 41.64
+  d 1.0
+  illum 2
+  Kd 0.498 0.498 0.498
+  Ka 0 0 0
+  Ks 0.498 0.498 0.498
+
+newmtl polySurf1_2
+  Ns 26.4
+  d 1.0
+  illum 2
+  Kd 0.9098 0.898 0.9294
+  Ka 0 0 0
+  Ks 0.498 0.498 0.498
+
+newmtl polySurf1_3
+  Ns 26.4
+  d 1.0
+  illum 2
+  Kd 0.8588 0 0
+  Ka 0 0 0
+  Ks 0.498 0.498 0.498
+
+newmtl polySurf1_4
+  Ns 1.0
+  d 1.0
+  illum 2
+  Kd 0 0.2392 0.5373
+  Ka 0 0 0
+  Ks 0.0471 0.0471 0.0471
+
+newmtl polySurf1_5
+  Ns 1.0
+  d 1.0
+  illum 2
+  Kd 0.2667 0.1294 0
+  Ka 0 0 0
+  Ks 0.0471 0.0471 0.0471
+
+newmtl polySurf2
+  Ns 26.4
+  d 1.0
+  illum 2
+  Kd 0.8588 0 0
+  Ka 0 0 0
+  Ks 0.498 0.498 0.498
+
+newmtl polySurf2_1
+  Ns 26.4
+  d 1.0
+  illum 2
+  Kd 1.0 1.0 1.0
+  Ka 0 0 0
+  Ks 0.498 0.498 0.498
+
+newmtl polySurf2_2
+  Ns 26.4
+  d 1.0
+  illum 2
+  Kd 0.4471 0.4471 0.4471
+  Ka 0 0 0
+  Ks 0.498 0.498 0.498
+
+newmtl polySurf3
+  Ns 26.4
+  d 1.0
+  illum 2
+  Kd 0 0 0
+  Ka 0 0 0
+  Ks 0.498 0.498 0.498
+
+newmtl polySurf4
+  Ns 26.4
+  d 1.0
+  illum 2
+  Kd 0 0 0
+  Ka 0 0 0
+  Ks 0.498 0.498 0.498
+
+newmtl polySurf5
+  Ns 26.4
+  d 1.0
+  illum 2
+  Kd 0 0 0
+  Ka 0 0 0
+  Ks 0.498 0.498 0.498
+
+newmtl polySurf6
+  Ns 41.64
+  d 1.0
+  illum 2
+  Kd 0.498 0.498 0.498
+  Ka 0 0 0
+  Ks 0.498 0.498 0.498
+
+newmtl polySurf7
+  Ns 26.4
+  d 1.0
+  illum 2
+  Kd 0 0 0
+  Ka 0 0 0
+  Ks 0.498 0.498 0.498
+
+newmtl polySurf8
+  Ns 41.64
+  d 1.0
+  illum 2
+  Kd 0.498 0.498 0.498
+  Ka 0 0 0
+  Ks 0.498 0.498 0.498
+
+newmtl polySurfa
+  Ns 26.4
+  d 1.0
+  illum 2
+  Kd 0 0 0
+  Ka 0 0 0
+  Ks 0.498 0.498 0.498

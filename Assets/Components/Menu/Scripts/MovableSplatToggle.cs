@@ -20,8 +20,8 @@ public class MovableSplatToggle : MonoBehaviour
         foreach (GameObject gsplat in gsplats)
         {
             // disable xr interaction components
-            var interactables = gsplat.GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.Interactables.XRBaseInteractable>();
-            foreach (var interactable in interactables)
+            var interactable = gsplat.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRBaseInteractable>();
+            if (interactable != null)
             {
                 interactable.enabled = disabled == 0;
             }
