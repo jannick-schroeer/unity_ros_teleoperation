@@ -12,4 +12,9 @@ public class FPSCounter : MonoBehaviour
         float fps = 1.0f / deltaTime;
         fpsText.text = $"{fps:0.} FPS";
     }
+    
+    public void ToggleVisible()
+    {
+        fpsText.enabled = !fpsText.enabled;
+    }
 }
