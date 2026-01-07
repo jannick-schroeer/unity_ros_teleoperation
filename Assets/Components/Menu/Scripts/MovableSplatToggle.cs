@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class MovableSplatToggle : MonoBehaviour
 {
-    private GameObject[] gsplats;
+    public GameObject[] gsplats;
     void Start()
     {
-        gsplats = GameObject.FindGameObjectsWithTag("gsplat");
+        /*gsplats = GameObject.FindGameObjectsWithTag("gsplat");
         if (gsplats == null)
         {
             Debug.LogError("No gsplats found in the scene.");
-        }
+        }*/
     }
 
     public void SetMovableGsplatsEnabled(int disabled)
