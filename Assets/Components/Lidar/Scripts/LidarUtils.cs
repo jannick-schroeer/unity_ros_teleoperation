@@ -9,6 +9,7 @@ using GaussianSplatting.Editor;
 using GaussianSplatting.Runtime;
 using Unity.Collections;
 using UnityEngine.Experimental.Rendering;
+using System.Diagnostics;
 
 
 public class LidarUtils
@@ -434,6 +435,11 @@ public class LidarUtils
         return (int)(y * GaussianSplatAsset.kTextureWidth + x);
     }
 
+    static int NextMultipleOf(int size, int multipleOf)
+    {
+        return (size + multipleOf - 1) / multipleOf * multipleOf;
+    }
+
     public static SplatData ExtractSplat(PointCloud2Msg data, int maxPts, VizType vizType, out int numPts)
     {
 
@@ -466,6 +472,11 @@ public class LidarUtils
         outData.color = new byte[mipmapSize]; // 4 float for color
         outData.other = new byte[numPts * 16]; // 1 uint for rotation, 3 floats for scale
         outData.normal = new byte[numPts * 12]; // 3 floats for normal
+
+        float3 min_scale = default;
+        float3 max_scale = default;
+        float4 min_dc = default;
+        float4 max_dc = default;
         // For each point...
         for (int i = 0; i < numPts; i++)
         {
@@ -482,44 +493,61 @@ public class LidarUtils
             }
             // Copy the next 16 bytes (four floats) from the incoming point into color data
             int textureIndex = SplatIndexToTextureIndex((uint) i);
-            float dc0 = System.BitConverter.ToSingle(data.data, inIdx + 56);
-            float dc1 = System.BitConverter.ToSingle(data.data, inIdx + 60);
-            float dc2 = System.BitConverter.ToSingle(data.data, inIdx + 64);
-            float opacity = System.BitConverter.ToSingle(data.data, inIdx + 68);
-            color[textureIndex] = new float4(dc0, dc1, dc2, opacity);
+            float3 dc0 = new float3(
+                System.BitConverter.ToSingle(data.data, inIdx + 52),
+                System.BitConverter.ToSingle(data.data, inIdx + 56),
+                System.BitConverter.ToSingle(data.data, inIdx + 60)
+            );
+            float opacity = System.BitConverter.ToSingle(data.data, inIdx + 64);
+            dc0 = GaussianUtils.SH0ToColor(dc0);
+            opacity = GaussianUtils.Sigmoid(opacity);
+            color[textureIndex] = new float4(dc0.x, dc0.y, dc0.z, opacity);
             // bytesToCopy = Mathf.Min(12, data.data.Length - (inIdx + 56));
             // if (bytesToCopy > 0)
             // {
             //     System.Buffer.BlockCopy(data.data, inIdx + 56, outData.color, SplatIndexToTextureIndex(i), bytesToCopy);
             // }
-            // Copy the next 12 bytes (three floats) from the incoming point into scale data
-            bytesToCopy = Mathf.Min(12, data.data.Length - (inIdx + 16));
-            if (bytesToCopy > 0)
-            {
-                System.Buffer.BlockCopy(data.data, inIdx + 16, outData.other, vector4Idx + 4, bytesToCopy);
-            }
             // Copy the next 16 bytes (four floats) from the incoming point into rotation data
                         
-            float w = System.BitConverter.ToSingle(data.data, inIdx + 28);
-            float x = System.BitConverter.ToSingle(data.data, inIdx + 32);
-            float y = System.BitConverter.ToSingle(data.data, inIdx + 36);
-            float z = System.BitConverter.ToSingle(data.data, inIdx + 40);
+            float w = System.BitConverter.ToSingle(data.data, inIdx + 24);
+            float x = System.BitConverter.ToSingle(data.data, inIdx + 28);
+            float y = System.BitConverter.ToSingle(data.data, inIdx + 32);
+            float z = System.BitConverter.ToSingle(data.data, inIdx + 36);
             float4 rot = new float4(
+                w,
                 x, 
                 y, 
-                z, 
-                w
+                z
             );
-            uint encoded = EncodeQuatToNorm10(rot);
-            byte[] bytes = System.BitConverter.GetBytes(encoded); // little-endian Array.Copy(bytes, 0, outData.other, vector4Idx, 4);
-            System.Array.Copy(bytes, 0, outData.other, vector4Idx, 4);
+            var qq = GaussianUtils.NormalizeSwizzleRotation(rot);
+            qq = GaussianUtils.PackSmallest3Rotation(qq);
+            uint encoded = EncodeQuatToNorm10(qq);
+            byte[] otherData = System.BitConverter.GetBytes(encoded); // little-endian Array.Copy(bytes, 0, outData.other, vector4Idx, 4);
+            System.Buffer.BlockCopy(otherData, 0, outData.other, vector4Idx, 4);
             // System.Buffer.BlockCopy(data.data, inIdx + 28, outData.rotation, vector4Idx, bytesToCopy);
-
-            // Copy the next 12 bytes (three floats) from the incoming point into normal data
-            bytesToCopy = Mathf.Min(12, data.data.Length - (inIdx + 44));
+            // Copy the next 12 bytes (three floats) from the incoming point into scale data
+            bytesToCopy = Mathf.Min(12, data.data.Length - (inIdx + 12));
             if (bytesToCopy > 0)
             {
-                System.Buffer.BlockCopy(data.data, inIdx + 44, outData.normal, vector3Idx, bytesToCopy);
+                System.Buffer.BlockCopy(data.data, inIdx + 12, outData.other, vector4Idx + 4, bytesToCopy);
+            }
+            float3 scale = new float3(
+                System.BitConverter.ToSingle(data.data, inIdx + 12),
+                System.BitConverter.ToSingle(data.data, inIdx + 16),
+                System.BitConverter.ToSingle(data.data, inIdx + 20)
+                );
+            float3 linearScale = GaussianUtils.LinearScale(scale);
+            byte[] sxBytes = System.BitConverter.GetBytes(linearScale.x);
+            byte[] syBytes = System.BitConverter.GetBytes(linearScale.y);
+            byte[] szBytes = System.BitConverter.GetBytes(linearScale.z);
+            System.Buffer.BlockCopy(sxBytes, 0, outData.other, vector4Idx + 4, 4);
+            System.Buffer.BlockCopy(syBytes, 0, outData.other, vector4Idx + 8, 4);
+            System.Buffer.BlockCopy(szBytes, 0, outData.other, vector4Idx + 12, 4);
+            // Copy the next 12 bytes (three floats) from the incoming point into normal data
+            bytesToCopy = Mathf.Min(12, data.data.Length - (inIdx + 40));
+            if (bytesToCopy > 0)
+            {
+                System.Buffer.BlockCopy(data.data, inIdx + 40, outData.normal, vector3Idx, bytesToCopy);
             }
         }
 
@@ -535,6 +563,9 @@ public class LidarUtils
                 System.Buffer.BlockCopy(System.BitConverter.GetBytes(pix.w), 0, outData.color, dstIdx + 12, 4);                dstIdx += 16;
             }
         }
+
+        UnityEngine.Debug.Log($"Splat dc range: min({min_dc.x}, {min_dc.y}, {min_dc.z}, {min_dc.w}) max({max_dc.x}, {max_dc.y}, {max_dc.z}, {max_dc.w})");
+        UnityEngine.Debug.Log($"Splat scale range: min({min_scale.x}, {min_scale.y}, {min_scale.z}) max({max_scale.x}, {max_scale.y}, {max_scale.z})");
         return outData;
     }
     
