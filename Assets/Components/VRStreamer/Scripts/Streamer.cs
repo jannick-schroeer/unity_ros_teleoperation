@@ -52,11 +52,7 @@ public class Streamer : MonoBehaviour
 
         _camera.CopyFrom(Camera.main);
 
-#if ROS2
-        _header = new HeaderMsg(new TimeMsg(0, 0), "VR");
-#else
-        _header = new HeaderMsg(0, new TimeMsg(0, 0), "VR");
-#endif
+        _header = new HeaderMsg();
 
         // _camera = Camera.main;
         _camera.targetTexture = _renderTexture;

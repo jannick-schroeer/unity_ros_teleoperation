@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Components/Interaction.meta
+guid: 74ae7b4599905e24d9e8a65409a4e837
+========
 guid: 691c7100f44155f4e9ab5f9924d45e68
+>>>>>>>> dev/unity6:Assets/CompositionLayers.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

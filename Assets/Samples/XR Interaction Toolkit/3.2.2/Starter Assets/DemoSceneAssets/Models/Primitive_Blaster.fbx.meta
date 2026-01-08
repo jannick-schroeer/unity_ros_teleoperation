@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Samples/XR Interaction Toolkit/3.2.2/Starter Assets/Models/Pinch_Pointer_LOD0.fbx.meta
+guid: fd0c2b00cac347148b2386c5385490d3
+========
 guid: e8cf87fef9298444ca38948b2c8a4073
+>>>>>>>> dev/unity6:Assets/Samples/XR Interaction Toolkit/3.2.2/Starter Assets/DemoSceneAssets/Models/Primitive_Blaster.fbx.meta
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []

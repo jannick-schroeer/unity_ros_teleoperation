@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Splats/axis_splats_3dgs_chk.bytes.meta
+guid: 5382e8a9a283cfd43ab8c7e16aa5f5f9
+TextScriptImporter:
+========
 guid: 652585f331bff7e44afb8fe71ec2119f
 PrefabImporter:
+>>>>>>>> dev/unity6:Assets/Samples/XR Interaction Toolkit/3.2.2/Starter Assets/DemoSceneAssets/Prefabs/Climb/Multi Floor Ladder.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

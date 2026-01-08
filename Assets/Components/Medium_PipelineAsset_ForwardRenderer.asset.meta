@@ -1,8 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Components/Medium_PipelineAsset_ForwardRenderer.asset.meta
 guid: cd7bd1e14078bf24fb24631f83e2319b
+========
+guid: db6239f7ccb29ca4aac63126c6a35e7d
+>>>>>>>> dev/unity6:Assets/Samples/XR Interaction Toolkit/3.2.2/Starter Assets/Animations/Climb Teleport Arrow.controller.meta
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 0
+  mainObjectFileID: 9100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

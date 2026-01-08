@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Components/Medium_PipelineAsset.asset.meta
+guid: b1913ece114042248be18a1f0c6100d4
+========
 guid: ebfa13455423c254e943b87bf6e1f310
+>>>>>>>> dev/unity6:Assets/Samples/XR Interaction Toolkit/3.2.2/Starter Assets/Animations/ArrowBounce.anim.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 7400000

@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Samples/XR Interaction Toolkit/3.2.2/Starter Assets/Animations/ArrowBounce.anim.meta
+guid: ebfa13455423c254e943b87bf6e1f310
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+========
 guid: bbb56ac3cf3c61a46ab3887c0fdbda8f
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
+>>>>>>>> dev/unity6:Assets/Samples/XR Interaction Toolkit/3.2.2/Starter Assets/DemoSceneAssets/Materials/Concrete Dark Blue.mat.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Samples/XR Interaction Toolkit/3.2.2/Starter Assets/Animations/Climb Teleport Arrow.controller.meta
+guid: db6239f7ccb29ca4aac63126c6a35e7d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+========
 guid: 842f1b88643f1bb458ba6243088e344e
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
+>>>>>>>> dev/unity6:Assets/Samples/XR Interaction Toolkit/3.2.2/Starter Assets/DemoSceneAssets/Materials/Concrete Grey.mat.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 
