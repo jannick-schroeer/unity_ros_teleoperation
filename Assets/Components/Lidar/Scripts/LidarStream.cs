@@ -90,7 +90,7 @@ public static class VizTypeExtensions
             case VizType.RGBDMesh:
                 return 5;
             case VizType.Splat:
-                return 18;
+                return 17;
             default:
                 return 4;
         }
