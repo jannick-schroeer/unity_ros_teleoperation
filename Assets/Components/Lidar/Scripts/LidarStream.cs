@@ -75,7 +75,7 @@ public enum VizType
     Lidar = 0,
     RGBDMesh = 1,
     RGBD = 2,
-    Splat = 4,
+    Splat = 3,
 }
 
 public static class VizTypeExtensions
@@ -126,6 +126,8 @@ public class LidarStream : SensorStream
     public Slider densitySlider;
     public Slider sizeSlider;
     public Dropdown colorModeDropdown;
+
+    public Dropdown vizTypeDropdown;
 
     public TextMeshProUGUI debugText;
     public TextMeshProUGUI topicText;
@@ -189,6 +191,20 @@ public class LidarStream : SensorStream
             };
             colorModeDropdown.AddOptions(colorOptions);
             colorModeDropdown.onValueChanged.AddListener(OnColorSelect);
+        }
+
+        if (vizTypeDropdown != null)
+        {
+            vizTypeDropdown.ClearOptions();
+            List<string> vizOptions = new List<string>
+            {
+                "Lidar",
+                "RGBD Mesh",
+                "RGBD",
+                "Splat"
+            };
+            vizTypeDropdown.AddOptions(vizOptions);
+            vizTypeDropdown.onValueChanged.AddListener(OnVizTypeSelect);
         }
 
 
@@ -497,6 +513,17 @@ public class LidarStream : SensorStream
             ColorMode.Z => _zKeyword,
             _ => _intensityKeyword // Default to intensity if something goes wrong
         });
+    }
+
+    public void OnVizTypeSelect(int value)
+    {
+        if (value < 0 || value >= vizTypeDropdown.options.Count)
+        {
+            Debug.LogWarning("Invalid viz type selected: " + value);
+            return;
+        }
+
+        vizType = (VizType)value;
     }
 
     public override void ToggleTrack(int mode)

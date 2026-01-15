@@ -5,7 +5,6 @@ using RosMessageTypes.Sensor;
 using RosMessageTypes.Std;
 using System.Security.Cryptography.X509Certificates;
 using Unity.Mathematics;
-using GaussianSplatting.Editor;
 using GaussianSplatting.Runtime;
 using Unity.Collections;
 using UnityEngine.Experimental.Rendering;
