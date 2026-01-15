@@ -337,7 +337,7 @@ public class LidarStream : SensorStream
 
     private void Update()
     {
-        if (_enabled)
+        if (_enabled && vizType != VizType.Splat)
         {
             Transform parentTransform = _parent != null && useTF ? _parent.transform : transform;
             Matrix4x4 localToWorldMatrix = parentTransform.localToWorldMatrix;
