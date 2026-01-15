@@ -113,11 +113,11 @@ public class LidarStream : SensorStream
 
     public bool useTF = true;
     public float scale = 1.0f;
-    public int maxPts = 30_000_000;
+    public int maxPts = 30_000;
     public int displayPts = 10;
     public int sides = 3;
     private RenderParams renderParams;
-    public VizType vizType = VizType.Splat;
+    public VizType vizType = VizType.Lidar;
 
     public ColorMode colorMode = ColorMode.Intensity;
     public Color intensityMin = Color.black;

@@ -2502,8 +2502,8 @@ MonoBehaviour:
   point_material: {fileID: 2100000, guid: 4a361d2cecf991e49aed96934cdc50f4, type: 2}
   useTF: 1
   scale: 0.1
-  maxPts: 30000000
-  displayPts: 100000
+  maxPts: 30000
+  displayPts: 30000
   sides: 3
   vizType: 0
   colorMode: 1
