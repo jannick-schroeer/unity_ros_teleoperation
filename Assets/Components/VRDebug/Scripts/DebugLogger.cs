@@ -72,6 +72,9 @@ public class DebugLogger : MonoBehaviour
             case LogType.Exception:
             case LogType.Assert:
                 colorTag += "red\">";
+                // Skip any error containing "joystick" or "handpub"
+                if (logString.Contains("Joystick") || logString.Contains("Activate") || logString.Contains("HandPub"))
+                    return;
                 break;
             case LogType.Warning:
                 colorTag += "orange\">";

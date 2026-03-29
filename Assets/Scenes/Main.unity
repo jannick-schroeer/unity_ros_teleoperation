@@ -1082,7 +1082,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScaleOnButtonGrabTransformer
   scaleSpeed: 0.5
   minScale: 0.2
-  maxScale: 3
+  maxScale: 150
   increaseScaleAction:
     m_UseReference: 0
     m_Action:
@@ -2219,9 +2219,25 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1289427959714379009, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1289427959714379009, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1289427959714379009, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -20.15
+      objectReference: {fileID: 0}
     - target: {fileID: 1630301738486407771, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 1683015856050523412, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2888525264618850335, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2266,6 +2282,30 @@ PrefabInstance:
     - target: {fileID: 2923282960450811557, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2952757037508566497, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 3337404513842709173, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196524410204605326, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196524410204605326, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196524410204605326, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 7.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237420357206137021, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4660666500525482379, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
@@ -2318,6 +2358,10 @@ PrefabInstance:
     - target: {fileID: 5946724611436637860, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 7194512740443469361, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8605111556703751387, guid: 284c18ecc4f72ec20968371b116bf40b, type: 3}
       propertyPath: m_Name
@@ -2676,8 +2720,8 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_StartingSingleGrabTransformers:
-  - {fileID: 349821420}
   - {fileID: 1061614061}
+  - {fileID: 349821420}
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
@@ -4173,7 +4217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScaleOnButtonGrabTransformer
   scaleSpeed: 0.5
   minScale: 0.2
-  maxScale: 3
+  maxScale: 150
   increaseScaleAction:
     m_UseReference: 0
     m_Action:
@@ -4948,8 +4992,8 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_StartingSingleGrabTransformers:
-  - {fileID: 1260255211}
   - {fileID: 236901787}
+  - {fileID: 1260255211}
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
